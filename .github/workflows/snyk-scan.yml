@@ -1,18 +1,23 @@
 name: Snyk Security Scan
 on: [push]
-
 jobs:
   snyk:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Usa la versión que necesites
+      
+      - name: Install dependencies
+        run: npm install
+      
       - name: Run Snyk test
         uses: snyk/actions/node@master
-        timeout-minutes: 5  # Cancela si excede 5 minutos
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          command: monitor  # Más rápido que 'test'
+          command: test  # Usa "test" en lugar de "monitor" (más rápido)
           args: --severity-threshold=high --detection-depth=3
