@@ -2,6 +2,6 @@
   "name": "fitnessapp-demo",
   "version": "1.0.0",
   "dependencies": {
-    "axios": "0.21.1"  # Versión con vulnerabilidad conocida (SSRF)
+    "axios": "0.21.1"
   }
 }
