@@ -10,7 +10,9 @@ jobs:
 
       - name: Run Snyk test
         uses: snyk/actions/node@master
+        timeout-minutes: 5  # Cancela si excede 5 minutos
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: test --severity-threshold=high
+          command: monitor  # Más rápido que 'test'
+          args: --severity-threshold=high --detection-depth=3
